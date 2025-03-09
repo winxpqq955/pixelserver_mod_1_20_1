@@ -1,0 +1,36 @@
+{
+  "required": true,
+  "package": "me.ho3.classictweaks.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "mixins": [
+    "blocking.ItemMixin",
+    "classic_ender_pearl.EnderPearlItemMixin",
+    "classic_hurt_cam.PlayerEntityMixin",
+    "disable_forge_update_check.ForgeModMixin",
+    "fuckoff_fishhook.FishingBobberEntityRenderer"
+  ],
+  "client": [
+    "better_view_bobbing.GameRendererMixin",
+    "blocking.MixinBipedEntityModel",
+    "blocking.MixinHeldItemRenderer",
+    "blocking.MixinPlayerEntityRenderer",
+    "blocking.MixinPlayerHeldItemFeatureRenderer",
+    "break_and_hit_delay_fix.ClientPlayerInteractionManagerMixin",
+    "break_and_hit_delay_fix.MinecraftClientMixin",
+    "classic_bed_shape.MixinBedBlock",
+    "classic_bed_shape.MixinBlockEntityRendererDispatcher",
+    "classic_pause_menu.MinecraftClientMixin",
+    "classic_sneak.CameraMixin",
+    "classic_title_and_icon.MinecraftClientMixin",
+    "disable_modern_fade.ForgeLoadingOverlayMixin",
+    "disable_modern_fade.TitleScreenMixin",
+    "fast_ping_fix.AddressResolverMixin",
+    "force_enable_programmer_art.DefaultClientResourcePackProviderMixin",
+    "minimize_language.LanguageResourceMetadataMixin",
+    "smooth_scrolling.EntryListWidgetMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

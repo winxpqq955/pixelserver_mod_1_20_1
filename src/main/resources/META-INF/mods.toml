@@ -1,0 +1,9 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+license = "All rights reserved"
+
+[[mods]]
+modId = "classictweaks"
+version = "${version}"
+displayName = "Classic Tweaks"
+description = ''
