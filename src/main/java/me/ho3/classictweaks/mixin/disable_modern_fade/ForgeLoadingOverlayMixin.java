@@ -23,6 +23,7 @@ public class ForgeLoadingOverlayMixin {
     private void onRender(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (this.fadeOutStart != -1) {
             this.minecraft.setOverlay(null);
+
         }
     }
 }
