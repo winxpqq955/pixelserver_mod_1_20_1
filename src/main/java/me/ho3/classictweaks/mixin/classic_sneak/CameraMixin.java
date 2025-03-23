@@ -42,7 +42,7 @@ public abstract class CameraMixin {
     @ModifyConstant(method = "updateEyeHeight", constant = @Constant(floatValue = 0.5f))
     public float sneaktweak$modifyCameraYSpeed(float modifier) {
         if (!classicTweaks$isValidPose()) return modifier;
-        return false ? modifier * 0.5f : 0;
+        return (float) 0;
     }
 
     @Unique

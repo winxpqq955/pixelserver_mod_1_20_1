@@ -18,18 +18,20 @@
     "blocking.MixinPlayerHeldItemFeatureRenderer",
     "break_and_hit_delay_fix.ClientPlayerInteractionManagerMixin",
     "break_and_hit_delay_fix.MinecraftClientMixin",
+    "cancel_brand.ClientPlayNetworkHandlerMixin",
     "classic_bed_shape.MixinBedBlock",
     "classic_bed_shape.MixinBlockEntityRendererDispatcher",
     "classic_pause_menu.MinecraftClientMixin",
     "classic_sneak.CameraMixin",
+    "classic_sneak.ClientPlayerEntityMixin",
     "classic_title_and_icon.MinecraftClientMixin",
     "disable_modern_fade.ForgeLoadingOverlayMixin",
     "disable_modern_fade.SplashOverlayMixin",
     "disable_modern_fade.TitleScreenMixin",
-    "fast_ping_fix.AddressResolverMixin",
     "force_enable_programmer_art.DefaultClientResourcePackProviderMixin",
     "minimize_language.LanguageResourceMetadataMixin",
-    "smooth_scrolling.EntryListWidgetMixin"
+    "smooth_scrolling.EntryListWidgetMixin",
+    "test.testmixin"
   ],
   "injectors": {
     "defaultRequire": 1
