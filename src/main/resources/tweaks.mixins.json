@@ -8,6 +8,7 @@
     "classic_ender_pearl.EnderPearlItemMixin",
     "classic_hurt_cam.PlayerEntityMixin",
     "disable_forge_update_check.ForgeModMixin",
+    "fake_swing.LivingEntityAccessor",
     "fuckoff_fishhook.FishingBobberEntityRenderer"
   ],
   "client": [
@@ -28,6 +29,8 @@
     "disable_modern_fade.ForgeLoadingOverlayMixin",
     "disable_modern_fade.SplashOverlayMixin",
     "disable_modern_fade.TitleScreenMixin",
+    "fake_swing.HeldItemRendererMixin",
+    "fake_swing.MinecraftClientMixin",
     "force_enable_programmer_art.DefaultClientResourcePackProviderMixin",
     "minimize_language.LanguageResourceMetadataMixin",
     "smooth_scrolling.EntryListWidgetMixin",
