@@ -12,6 +12,8 @@
     "fuckoff_fishhook.FishingBobberEntityRenderer"
   ],
   "client": [
+    "backport_screen.ScreenMxixn",
+    "backport_screen.TitleScreenMixin",
     "better_view_bobbing.GameRendererMixin",
     "blocking.MixinBipedEntityModel",
     "blocking.MixinHeldItemRenderer",

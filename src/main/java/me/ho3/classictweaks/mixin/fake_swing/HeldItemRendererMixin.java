@@ -20,7 +20,6 @@ public abstract class HeldItemRendererMixin {
 
     @Shadow protected abstract void applySwingOffset(MatrixStack matrices, Arm arm, float swingProgress);
 
-
     @Inject(method = "renderFirstPersonItem",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/HeldItemRenderer;applyEquipOffset(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/Arm;F)V", shift = At.Shift.AFTER),
             slice = @Slice(
