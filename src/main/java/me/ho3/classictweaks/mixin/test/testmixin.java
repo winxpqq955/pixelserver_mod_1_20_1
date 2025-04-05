@@ -16,7 +16,7 @@ public class testmixin {
     public void test(long window, int key, int scancode, int action, int modifiers, CallbackInfo ci) {
 
         if (key == GLFW.GLFW_KEY_RIGHT_SHIFT && action == GLFW.GLFW_PRESS) {
-            MinecraftClient.getInstance().setScreen(new UserInterface());
+            //MinecraftClient.getInstance().setScreen(new UserInterface());
         }
     }
 }

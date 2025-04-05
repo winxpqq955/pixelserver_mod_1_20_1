@@ -36,6 +36,7 @@ repositories {
         name "essentialMavenPublic"
         url "https://repo.essential.gg/public"
     }
+    maven { url 'https://jitpack.io' }
 }
 
 configurations.configureEach {
@@ -52,6 +53,9 @@ dependencies {
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
     implementation(include("io.github.llamalad7:mixinextras-forge:0.4.1"))
+    implementation (forgeDependencies('com.github.MrExplode:Blaze:2.1.1')) {
+        setTransitive(false)
+    }
 }
 
 processResources {
