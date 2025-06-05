@@ -371,5 +371,11 @@ public class UserInterface extends Screen {
             this.category = category;
             this.enabled = enabled;
         }
+
+        public void toggle() {
+            enabled = !enabled;
+        }
     }
+
+
 }

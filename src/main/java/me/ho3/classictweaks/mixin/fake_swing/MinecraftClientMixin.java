@@ -3,7 +3,6 @@ package me.ho3.classictweaks.mixin.fake_swing;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
@@ -15,6 +14,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -43,12 +43,14 @@ public class MinecraftClientMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void animatium$applySwingWhilstMining(CallbackInfo ci) {
-        if (this.player != null && !(this.player.getStackInHand(this.player.getActiveHand()).isEmpty() || !this.player.isUsingItem() || !this.options.attackKey.isPressed())) {
-            applySwingWhilstMining(this.world, this.player, this.crosshairTarget, this.particleManager);
+        if (this.player == null) return;
+        if (!(this.player.getStackInHand(this.player.getActiveHand()).isEmpty() || !this.player.isUsingItem() || !this.options.attackKey.isPressed())) {
+            classicTweaks$applySwingWhilstMining(this.world, this.player, this.crosshairTarget, this.particleManager);
         }
     }
 
-    private static void applySwingWhilstMining(World level, ClientPlayerEntity player, HitResult hitResult, ParticleManager particleEngine) {
+    @Unique
+    private static void classicTweaks$applySwingWhilstMining(World level, ClientPlayerEntity player, HitResult hitResult, ParticleManager particleEngine) {
         Hand activeHand = player.getActiveHand();
         Hand hand = Hand.MAIN_HAND;
         if (hitResult != null && hitResult.getType() == HitResult.Type.BLOCK && activeHand.equals(hand)) {

@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.guardsquare:proguard-gradle:7.7.0'
+    }
+}
+
 plugins {
     id "dev.architectury.loom" version "1.9.+"
 }
@@ -19,24 +28,41 @@ loom {
         mixinConfigs = [
                 "tweaks.mixins.json"
         ]
-
-        // missing access transformers?
-        // don't worry, you can still use them!
-        // note that your AT *MUST* be located at
-        // src/main/resources/META-INF/accesstransformer.cfg
-        // to work as there is currently no config option to change this.
-        // also, any names used in your access transformer will need to be
-        // in SRG mapped ("func_" / "field_" with MCP class names) to work!
-        // (both of these things may be subject to change in the future)
     }
+    runs {
+        client {
+            //一定要使用Jetbrains Runtime!!!
+            vmArgs "-XX:+UseG1GC"
+        }
+        remove server
+    }
+
 }
 
 repositories {
     maven {
+        url 'https://maven.aliyun.com/repository/public/'
+    }
+    maven {
+        url 'https://maven.aliyun.com/repository/central'
+    }
+    maven {
         name "essentialMavenPublic"
         url "https://repo.essential.gg/public"
     }
+    maven {
+        name 'IzzelAliz Maven'
+        url 'https://maven.izzel.io/releases/'
+    }
     maven { url 'https://jitpack.io' }
+
+    maven {
+        url "https://maven.blamejared.com"
+    }
+
+    repositories {
+        maven { url "https://api.modrinth.com/maven" }
+    }
 }
 
 configurations.configureEach {
@@ -51,11 +77,26 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     forge "net.minecraftforge:forge:${project.forge_version}"
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
-    implementation(include("io.github.llamalad7:mixinextras-forge:0.4.1"))
+    implementation (forgeDependencies("icyllis.modernui:ModernUI-Core:${modernui_version}")) {
+        exclude group: 'org.jetbrains', module: 'annotations'
+    }
+    implementation (forgeDependencies("icyllis.modernui:ModernUI-Markdown:${modernui_version}")) {
+        exclude group: 'org.jetbrains', module: 'annotations'
+    }
+    modImplementation "icyllis.modernui:ModernUI-Forge:${minecraft_version}-${modernui_version}.+"
+
+    //modImplementation("org.embeddedt:embeddium-1.20.1:0.3.9-git.f603a93+mc1.20.1")
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0-rc.3"))
+    implementation(include("io.github.llamalad7:mixinextras-forge:0.5.0-rc.3"))
     implementation (forgeDependencies('com.github.MrExplode:Blaze:2.1.1')) {
         setTransitive(false)
     }
+    modImplementation("maven.modrinth:immediatelyfast:1.5.0+1.20.4-forge")
+    modImplementation("maven.modrinth:embeddium:0.3.31+mc1.20.1")
+    modImplementation("maven.modrinth:entityculling:1.7.4")
+    modImplementation("maven.modrinth:ferrite-core:6.0.1")
+    modImplementation("maven.modrinth:modernfix:5.23.1+mc1.20.1")
 }
 
 processResources {
@@ -83,4 +124,15 @@ jar {
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.register('proguard', proguard.gradle.ProGuardTask) {
+    injars sourceSets.main.output
+    outjars "${buildDir}/libs/${project.archives_base_name}-${project.mod_version}-obf.jar"
+
+    libraryjars files(configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) })
+    libraryjars "${System.getProperty('java.home')}/jmods/java.base.jmod"
+
+    configuration 'proguard-rules.pro'
 }

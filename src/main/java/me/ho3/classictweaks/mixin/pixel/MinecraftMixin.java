@@ -17,12 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftMixin {
 
-
     @Inject(method = "onInitFinished", at = @At(value = "HEAD"), cancellable = true)
     public void onInitFinished(RealmsClient realms, ResourceReload reload, RunArgs.QuickPlay quickPlay, CallbackInfo ci) {
-       setOverlay(null);
-       setScreen(new BindScreen());
-       ci.cancel();
+//       setOverlay(null);
+//       setScreen(new BindScreen());
+//       ci.cancel();
     }
 
     @Shadow public abstract void setOverlay(@Nullable Overlay overlay);
