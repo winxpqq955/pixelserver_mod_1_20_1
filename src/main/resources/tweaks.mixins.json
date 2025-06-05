@@ -24,7 +24,6 @@
     "break_and_hit_delay_fix.MinecraftClientMixin",
     "cancel_brand.ClientPlayNetworkHandlerMixin",
     "classic_bed_shape.MixinBedBlock",
-    "classic_bed_shape.MixinBlockEntityRendererDispatcher",
     "classic_pause_menu.MinecraftClientMixin",
     "classic_sneak.CameraMixin",
     "classic_sneak.ClientPlayerEntityMixin",

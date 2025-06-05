@@ -18,10 +18,6 @@ import javax.net.ssl.HandshakeCompletedListener;
 @Mixin(ClientPlayNetworkHandler.class)
 public class ClientPlayNetworkHandlerMixin {
 
-    @Shadow @Final private static Logger LOGGER;
-
     @Redirect(method = "onGameJoin", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/ClientConnection;send(Lnet/minecraft/network/packet/Packet;)V"), require = 0)
-    public void onGameJoin(ClientConnection instance, Packet<?> packet) {
-        LOGGER.info("拦截BRAND发送");
-    }
+    public void onGameJoin(ClientConnection instance, Packet<?> packet) {}
 }

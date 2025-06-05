@@ -14,7 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.SwordItem;
 import net.minecraft.util.Arm;
 import net.minecraft.util.UseAction;
 import org.spongepowered.asm.mixin.Final;
@@ -34,8 +34,7 @@ public class MixinPlayerHeldItemFeatureRenderer<T extends PlayerEntity, M extend
 
     @Inject(method = "renderItem", at = @At("HEAD"), cancellable = true)
     protected void renderItem(LivingEntity entity, ItemStack stack, ModelTransformationMode transformationMode, Arm arm, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
-//        if (!stack.isEmpty() && entity.getActiveItem() == stack) {
-        if (entity.getActiveItem().getUseAction() == UseAction.BLOCK) {
+        if ((entity.getActiveItem().getItem() instanceof SwordItem) && entity.getActiveItem().getUseAction() == UseAction.BLOCK) {
             AdvancedBlockingRenderer.renderBlockingWithSword(this.playerHeldItemRenderer, this.getContextModel(), entity, stack, transformationMode, arm, matrices, vertexConsumers, light);
             ci.cancel();
         }

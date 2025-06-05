@@ -19,17 +19,6 @@ public abstract class MixinBedBlock extends HorizontalFacingBlock {
         super(settings);
     }
 
-    @Inject(at = @At("RETURN"), method = "getRenderType", cancellable = true)
-    private void getRenderType(BlockState state, CallbackInfoReturnable<BlockRenderType> cir) {
-        cir.setReturnValue(BlockRenderType.MODEL);
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isSideInvisible(BlockState state, BlockState neighborState, Direction offset) {
-        return neighborState.getBlock() instanceof BedBlock;
-    }
-
     @Unique
     private static VoxelShape CLASSIC_SHAPE;
 

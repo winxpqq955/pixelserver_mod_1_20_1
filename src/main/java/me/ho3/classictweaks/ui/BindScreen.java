@@ -49,16 +49,16 @@ public class BindScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        // 绘制模糊背景
         this.renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
-        final var str = "服务器昵称注册";
+        final var str = "昵称注册";
         final var x = context.getScaledWindowWidth() / 2 - this.textRenderer.getWidth(str) * 3 / 2;
         final var y = context.getScaledWindowHeight() / 2 - 80;
         context.getMatrices().push();
         context.getMatrices().translate(x, y, 0);
         context.getMatrices().scale(3.0f, 3.0f, 0.0f);
         context.drawTextWithShadow(this.textRenderer, str, 0 , 0, 0xFFFFFF);
+        context.getMatrices().scale(1.0f, 1.0f, 0.0f);
         context.getMatrices().pop();
     }
 
@@ -70,9 +70,8 @@ public class BindScreen extends Screen {
             // 处理输入为空的情况
             return;
         }
-        this.getMinecraft().setScreen(new MemeScreen());
+        this.getMinecraft().setScreen(new MemeScreen(username));
         // 如果验证通过，执行注册逻辑
-        // registerUser(username, email, password);
     }
 
     @Override

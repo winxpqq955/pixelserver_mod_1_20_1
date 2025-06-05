@@ -6,6 +6,7 @@ import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
+import net.minecraft.item.SwordItem;
 import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MixinPlayerEntityRenderer {
     @Inject(at = @At(value = "RETURN"), method = "getArmPose", cancellable = true)
     private static void swordblocking$getArmPose(AbstractClientPlayerEntity player, Hand hand, CallbackInfoReturnable<BipedEntityModel.ArmPose> cir) {
-        if (player.getActiveItem().getUseAction() == UseAction.BLOCK) {
+        if ((player.getActiveItem().getItem() instanceof SwordItem) && player.getActiveItem().getUseAction() == UseAction.BLOCK) {
             cir.setReturnValue(BipedEntityModel.ArmPose.EMPTY);
         }
     }

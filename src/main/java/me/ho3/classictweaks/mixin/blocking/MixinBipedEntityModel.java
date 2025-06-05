@@ -30,13 +30,13 @@ public abstract class MixinBipedEntityModel<T extends LivingEntity> {
 
     @Inject(method = "positionRightArm", at = @At("TAIL"))
     private void inj_positionRightArm(T entity, CallbackInfo ci) {
-        if (entity.getActiveItem().getUseAction() == UseAction.BLOCK) {
+        if ((entity.getActiveItem().getItem() instanceof SwordItem) && entity.getActiveItem().getUseAction() == UseAction.BLOCK) {
             this.rightArm.pitch = this.rightArm.pitch * 0.5F - 0.5424779F;
         }
     }
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;animateArms(Lnet/minecraft/entity/LivingEntity;F)V", shift = At.Shift.BEFORE), method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V")
     private void swordblocking$setBlockingAngles(T livingEntity, float f, float g, float h, float i, float j, CallbackInfo ci) {
-        if (livingEntity.getActiveItem().getUseAction() == UseAction.BLOCK) {
+        if ((livingEntity.getActiveItem().getItem() instanceof SwordItem) && livingEntity.getActiveItem().getUseAction() == UseAction.BLOCK) {
             this.positionRightArm(livingEntity);
         }
 

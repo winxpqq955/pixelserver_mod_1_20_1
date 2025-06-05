@@ -1,5 +1,6 @@
 package me.ho3.classictweaks.ui;
 
+import me.ho3.classictweaks.util.HttpUtil;
 import me.sunstorm.blaze.Animation;
 import me.sunstorm.blaze.AnimationType;
 import me.sunstorm.blaze.Animator;
@@ -10,15 +11,25 @@ import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
+import java.util.Map;
 
 public class MemeScreen extends Screen {
     private final Animator animator = new Animator();
     private final Animation fade;
-
-    protected MemeScreen() {
+    private final String reqName;
+    protected MemeScreen(final String username) {
         super(Text.of("Meme"));
+        reqName = username;
         fade = Animation.animation(Eases.LINEAR, AnimationType.bouncing(Eases.LINEAR), 0.1);
         animator.start(fade);
+        HttpUtil.post("http://localhost:8080/base/hasName", Map.of("name", reqName))
+                .thenAccept(response -> {
+                    System.out.println(response.statusCode());
+                })
+                .exceptionally(e -> {
+                    e.printStackTrace();
+                    return null;
+                });
     }
 
     private String wtf = "";
@@ -49,5 +60,10 @@ public class MemeScreen extends Screen {
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (keyCode == GLFW.GLFW_KEY_ESCAPE) return false;
         return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+    private boolean isRequested = false;
+    @Override
+    public void tick() {
+        if (isRequested) return;
     }
 }

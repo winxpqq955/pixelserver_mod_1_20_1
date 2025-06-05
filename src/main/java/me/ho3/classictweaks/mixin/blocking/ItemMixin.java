@@ -21,9 +21,7 @@ public class ItemMixin {
         if(user.getStackInHand(hand).getItem() instanceof SwordItem) {
             var stack = user.getStackInHand(hand);
             user.setCurrentHand(hand);
-            user.setSprinting(false);
             cir.setReturnValue(TypedActionResult.consume(stack));
-            //cir.setReturnValue(TypedActionResult.pass(stack));
         }
     }
 
